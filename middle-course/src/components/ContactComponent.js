@@ -5,6 +5,9 @@ import { Control, LocalForm, Errors  } from 'react-redux-form';
 
 class Contact extends Component{
     constructor(props) {
+        // Nếu không gọi super thì không khởi tạo được các thuộc tính, function, this của lớp cha.
+        // Trường hơp không truyền props vào thì sẽ không gọi được this.props ở trong hàm constructor này.
+        // Nhưng trong constructor của Component vẫn khởi tạo props cho nên vẫn sử dụng được this.props ở các function sau đó (ngoài constructor).
         super(props);
         this.state = {
             firstname: '',
