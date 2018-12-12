@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {Navbar, NavbarBrand} from 'reactstrap';
 import Home from './HomeComponent';
 import Menu from "./MenuComponent";
 import Contact from './ContactComponent';
