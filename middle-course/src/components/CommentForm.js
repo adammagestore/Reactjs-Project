@@ -19,20 +19,20 @@ class CommentForm extends Component {
         });
     }
 
-    handleComment() {
-        alert('comment');
+    handleComment(values) {
+        alert(JSON.stringify(values));
     }
 
     render(){
         const required = (val) => val && val.length;
         const maxLength = (len) => (val) => !(val) || (val.length <= len);
         const minLength = (len) => (val) => val && (val.length >= len);
-        const isNumber = (val) => !isNaN(Number(val));
+
         return(
             <React.Fragment>
                 <Nav className="ml-auto" navbar>
                     <NavItem>
-                        <Button outline onClick={this.toggleModal}><span className="fa fa-sign-in fa-lg"></span> Comment</Button>
+                        <Button outline onClick={this.toggleModal}><span className="fa fa-pencil fa-lg"></span>Submit Comment</Button>
                     </NavItem>
                 </Nav>
             <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
@@ -47,13 +47,19 @@ class CommentForm extends Component {
                         </Row>
                         <Row>
                             <Col>
-                                <Control.text model=".rating" id="rating" name="rating"
+                                <Control.select model=".rating" id="rating" name="rating"
                                               placeholder="Select ratring number"
                                               className="form-control"
                                               validators={{
                                                   required
                                               }}
-                                />
+                                >
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </Control.select>
                                 <Errors className="text-danger" model=".rating" show="touched"
                                         messages={{
                                             required: 'Required field',
@@ -75,8 +81,8 @@ class CommentForm extends Component {
                                               className="form-control"
                                               validators={{
                                                   required,
-                                                  minLength,
-                                                  maxLength
+                                                  minLength: minLength(2),
+                                                  maxLength: maxLength(15)
                                               }}
                                 />
                                 <Errors className="text-danger" model=".name" show="touched"
@@ -109,7 +115,7 @@ class CommentForm extends Component {
                         </div>
                         <div className="form-group">
                         <Row>
-                            <Col>
+                            <Col md={2}>
                                 <Button type="submit" value="submit" color="primary">Submit</Button>
                             </Col>
                         </Row>

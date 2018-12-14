@@ -110,7 +110,7 @@ class Contact extends Component{
                                                   placeholder="First Name"
                                                   className="form-control"
                                                   validators={{
-                                                      required, minLength, maxLength
+                                                      required, minLength: minLength(3), maxLength: maxLength(15)
                                                   }}
                                     />
                                     <Errors className="text-danger" model=".firstname" show="touched"
@@ -129,7 +129,7 @@ class Contact extends Component{
                                                   placeholder="Last Name"
                                                   className="form-control"
                                                   validators={{
-                                                      required, minLength, maxLength
+                                                      required, minLength:minLength(3), maxLength: maxLength(15)
                                                   }}
                                     />
                                     <Errors className="text-danger" model=".lastname" show="touched"
@@ -148,7 +148,7 @@ class Contact extends Component{
                                                   placeholder="Tel. Number"
                                                   className="form-control"
                                                   validators={{
-                                                      required, minLength, maxLength, isNumber
+                                                      required, minLength: minLength(2), maxLength: maxLength(15), isNumber
                                                   }}
                                     />
                                     <Errors
