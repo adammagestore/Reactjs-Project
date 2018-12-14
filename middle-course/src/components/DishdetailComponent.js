@@ -4,6 +4,7 @@ import {
     CardTitle, Breadcrumb, BreadcrumbItem
 } from 'reactstrap';
 import {Link} from 'react-router-dom';
+import CommentForm from './CommentForm';
 
 
 function RenderDish({dish}) {
@@ -26,7 +27,7 @@ function RenderComments({comments}) {
                     <h4>Comments</h4>
                     <ul className="list-unstyled">
                         {comments.map(comment => (
-                            <li>
+                            <li key={comment.id}>
                                 <p>{comment.comment}</p>
                                 <p>-- {comment.author}, {new Intl.DateTimeFormat('en-US', {
                                     year: 'numeric',
@@ -36,6 +37,7 @@ function RenderComments({comments}) {
                             </li>
                         ))}
                     </ul>
+                    <CommentForm />
                 </Card>
             </div>
         )
