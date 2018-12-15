@@ -37,7 +37,9 @@ function RenderComments({comments}) {
                             </li>
                         ))}
                     </ul>
-                    <CommentForm />
+                    <div className="col-3 comment-btn">
+                        <CommentForm />
+                    </div>
                 </Card>
             </div>
         )

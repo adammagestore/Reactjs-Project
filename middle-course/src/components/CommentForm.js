@@ -20,13 +20,14 @@ class CommentForm extends Component {
     }
 
     handleComment(values) {
-        alert(JSON.stringify(values));
+        alert("Author: " + values.author);
+        // alert(JSON.stringify(values));
     }
 
     render(){
         const required = (val) => val && val.length;
         const maxLength = (len) => (val) => !(val) || (val.length <= len);
-        const minLength = (len) => (val) => val && (val.length >= len);
+        const minLength = (len) => (val) => val && (val.length > len);
 
         return(
             <React.Fragment>
@@ -51,9 +52,10 @@ class CommentForm extends Component {
                                               placeholder="Select ratring number"
                                               className="form-control"
                                               validators={{
-                                                  required
+
                                               }}
                                 >
+                                    <option value=""></option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
@@ -71,23 +73,21 @@ class CommentForm extends Component {
                         <div className="form-group">
                         <Row>
                             <Col>
-                                <Label htmlFor="name">Your name</Label>
+                                <Label htmlFor="author">Your name</Label>
                             </Col>
                         </Row>
                         <Row>
                             <Col>
-                                <Control.text model=".name" id="name" name="name"
+                                <Control.text model=".author" id="author" name="author"
                                               placeholder="Your name"
                                               className="form-control"
                                               validators={{
-                                                  required,
                                                   minLength: minLength(2),
                                                   maxLength: maxLength(15)
                                               }}
                                 />
-                                <Errors className="text-danger" model=".name" show="touched"
+                                <Errors className="text-danger" model=".author" show="touched"
                                         messages={{
-                                            required: 'Required field',
                                             minLength: 'Must be greater than 2 characters',
                                             maxLength: 'Must be 15 characters or less'
                                         }}
