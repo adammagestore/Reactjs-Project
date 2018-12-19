@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Nav, NavItem, Button, Modal, ModalHeader, ModalBody, Row, Col, Input, Label} from 'reactstrap';
+import {Nav, NavItem, Button, Modal, ModalHeader, ModalBody, Row, Col, Label} from 'reactstrap';
 import { Control, LocalForm, Errors  } from 'react-redux-form';
 
 
@@ -20,12 +20,13 @@ class CommentForm extends Component {
     }
 
     handleComment(values) {
-        alert("Author: " + values.author);
+        this.props.addComment(values.id, values.rating, values.author, values.comment)
+        // alert("Author: " + values.author);
         // alert(JSON.stringify(values));
     }
 
     render(){
-        const required = (val) => val && val.length;
+        // const required = (val) => val && val.length;
         const maxLength = (len) => (val) => !(val) || (val.length <= len);
         const minLength = (len) => (val) => val && (val.length > len);
 
