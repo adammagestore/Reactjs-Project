@@ -1,26 +1,27 @@
-import {applyMiddleware, createStore, combineReducers} from 'redux';
-import { Dishes } from './dishesReducer';
-import { Comments } from './commentsReducer';
-import { Leaders } from './leadersReducer';
-import { Promotions } from './promotionsReducer';
+import {createStore, applyMiddleware, combineReducers, compose} from 'redux';
+import {createForms} from 'react-redux-form';
+import {Dishes} from './dishes';
+import {Comments} from './comments';
+import {Promotions} from './promotions';
+import {Leaders} from './leaders';
+import {InitialFeedback} from './forms';
+import thunk from 'redux-thunk'
+import logger from 'redux-logger'
 
-import thunk from 'redux-thunk';
-import logger from 'redux-logger';
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 export const ConfigureStore = () => {
     const store = createStore(
         combineReducers({
-            dishes: Dishes, // co the de value luon: Dishes, ko can key: dishes dang truoc cung duoc
-            leaders: Leaders,
+            dishes: Dishes,
             comments: Comments,
-            promotions: Promotions
+            promotions: Promotions,
+            leaders: Leaders,
+            ...createForms({
+                feedback: InitialFeedback
+            })
         }),
-        // Neu dung redux-logger thi ko can dung dong nay nua
-        // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__() || compose;
         applyMiddleware(thunk, logger)
-        // Neu muon dung ca 2 thi se dung nhu sau:
-        // enhhance = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__ || compose;
-
-    );
+    )
     return store;
 }
